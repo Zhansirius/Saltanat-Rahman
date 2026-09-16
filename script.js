@@ -20,23 +20,25 @@ document.addEventListener("DOMContentLoaded", () => {
     // WhatsApp Booking Logic
     const bookingForm = document.getElementById('bookingForm');
     
-    bookingForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const name = document.getElementById('name').value.trim();
-        const treatment = document.getElementById('treatment').value;
-        
-        // Define the WhatsApp number here (International format without + or 00)
-        const whatsappNumber = "1234567890"; 
-        
-        const message = `Hello, my name is ${name} and I would like to book a session for ${treatment}.`;
-        
-        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-        
-        // Open WhatsApp chat in a new tab
-        window.open(whatsappUrl, '_blank');
-        
-        // Optionally reset the form
-        bookingForm.reset();
-    });
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value.trim();
+            
+            // Номер WhatsApp в международном формате (без +)
+            const whatsappNumber = "77472080709"; 
+            
+            // Текст сообщения для мастера
+            const message = `Здравствуйте! Меня зовут ${name}, и я хочу записаться на прием.`;
+            
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            
+            // Открываем чат WhatsApp в новой вкладке
+            window.open(whatsappUrl, '_blank');
+            
+            // Очищаем форму
+            bookingForm.reset();
+        });
+    }
 });
