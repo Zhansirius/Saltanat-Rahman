@@ -1,0 +1,529 @@
+:root {
+    --black: #fdfdfd;
+    --white: #0a0a0a;
+    --gray-light: #1a1a1a;
+    --gray-dark: #cccccc;
+    --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, .logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition);
+}
+
+.logo {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.specialist-profile {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--black);
+    cursor: pointer;
+    transition: var(--transition);
+    
+    /* Задаем картинку как фон */
+    background-image: url('assets/icon.jpg');
+    background-size: cover;       /* Масштабирует картинку, чтобы заполнить круг */
+    background-position: center 10%; /* Сдвигает фокус: 'center' по горизонтали, '30%' (или больше/меньше) по вертикали */
+    background-repeat: no-repeat;
+    filter: grayscale(100%);
+}
+
+.specialist-profile:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: var(--transition);
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 2rem;
+    background: linear-gradient(to bottom, var(--white) 0%, var(--gray-light) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero-content {
+    max-width: 800px;
+    animation: fadeUp 1s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero h1 {
+    font-size: 4.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
+    color: var(--black);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--gray-dark);
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-inline: auto;
+}
+
+/* Buttons */
+.btn-primary {
+    display: inline-block;
+    background-color: var(--black);
+    color: var(--white);
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid var(--black);
+    border-radius: 0;
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--white);
+    transition: var(--transition);
+    z-index: 1;
+}
+
+.btn-primary:hover::after {
+    left: 0;
+}
+
+.btn-primary:hover {
+    color: var(--black);
+}
+
+.btn-primary span {
+    position: relative;
+    z-index: 2;
+}
+
+.full-width {
+    width: 100%;
+}
+
+/* Treatments Section */
+.treatments {
+    padding: 6rem 4rem;
+    background-color: var(--white);
+}
+
+.treatment-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+    margin-bottom: 8rem;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.treatment-row.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.treatment-row:last-child {
+    margin-bottom: 0;
+}
+
+.treatment-row.reverse {
+    flex-direction: row-reverse;
+}
+
+.treatment-image {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.treatment-image::after {
+    content: '';
+    display: block;
+    padding-bottom: 120%; /* creates aspect ratio */
+}
+
+.treatment-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: transform 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.treatment-row:hover .treatment-image img {
+    transform: scale(1.05);
+}
+
+.treatment-info {
+    flex: 1;
+    padding: 2rem;
+}
+
+.treatment-info h2 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.treatment-info h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background-color: var(--black);
+}
+
+.treatment-info p {
+    font-size: 1.1rem;
+    color: var(--gray-dark);
+    margin-bottom: 2rem;
+}
+
+.features {
+    list-style: none;
+}
+
+.features li {
+    font-size: 1.05rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+}
+
+.features li::before {
+    content: '—';
+    margin-right: 15px;
+    color: var(--black);
+    font-weight: bold;
+}
+
+/* Location & Booking Section */
+.location-booking {
+    display: flex;
+    justify-content: center;
+    min-height: 80vh;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.booking-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 6rem 4rem;
+    background-color: var(--black);
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.booking-container h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.booking-container p {
+    color: #555555;
+    margin-bottom: 3rem;
+}
+
+.booking-form .form-group {
+    margin-bottom: 2rem;
+}
+
+.booking-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #444444;
+}
+
+.booking-form input,
+.booking-form select {
+    width: 100%;
+    padding: 1rem 0;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #555555;
+    color: var(--white);
+    font-size: 1.1rem;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.3s;
+}
+
+.booking-form input:focus,
+.booking-form select:focus {
+    outline: none;
+    border-bottom-color: var(--white);
+}
+
+.booking-form select {
+    appearance: none;
+    cursor: pointer;
+}
+
+.booking-form select option {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.booking-form button {
+    background-color: var(--white);
+    color: var(--black);
+    border: 1px solid var(--white);
+    padding: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.booking-form button:hover {
+    background-color: transparent;
+    color: var(--white);
+}
+
+.booking-form button span {
+    position: relative;
+    z-index: 2;
+}
+
+.booking-form button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--black);
+    transition: var(--transition);
+    z-index: 1;
+}
+
+.booking-form button:hover::after {
+    left: 0;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 3rem;
+    background-color: var(--black);
+    color: #888888;
+    border-top: 1px solid #eeeeee;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .header {
+        padding: 1rem 2rem;
+    }
+    
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+    
+    .treatments {
+        padding: 4rem 2rem;
+    }
+    
+    .treatment-row, .treatment-row.reverse {
+        flex-direction: column;
+        gap: 2rem;
+        margin-bottom: 5rem;
+    }
+    
+    .treatment-image::after {
+        padding-bottom: 80%;
+    }
+    
+    .location-booking {
+        flex-direction: column;
+    }
+    
+    .booking-container {
+        padding: 4rem 2rem;
+    }
+}
+
+/* Instagram Block Styling */
+.instagram-block {
+    margin-top: 3rem;
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.instagram-subtitle {
+    margin-bottom: 1rem;
+    color: #888888;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.instagram-btn {
+    display: inline-block;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #ffffff;
+    padding-bottom: 4px;
+    transition: all 0.3s ease;
+}
+
+.instagram-btn:hover {
+    opacity: 0.7;
+    transform: translateY(-2px);
+}
+/* Мобильная адаптивность (для телефонов и планшетов) */
+@media (max-width: 768px) {
+    /* Уменьшаем отступы по бокам */
+    .header {
+        padding: 1rem 1.5rem;
+    }
+
+    .treatments {
+        padding: 3rem 1.5rem;
+    }
+
+    .booking-container {
+        padding: 4rem 1.5rem;
+    }
+
+    /* Уменьшаем главный заголовок на смартфонах, чтобы он не ломался */
+    .hero h1 {
+        font-size: 2.5rem;
+        line-height: 1.2;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    /* Заголовки блоков услуг */
+    .treatment-info h2 {
+        font-size: 2rem;
+    }
+
+    /* Заголовок формы бронирования */
+    .booking-container h2 {
+        font-size: 2.2rem;
+    }
+
+    /* Делаем картинки в блоках услуг на всю ширину */
+    .treatment-row {
+        gap: 1.5rem;
+        margin-bottom: 4rem;
+    }
+
+    .treatment-info {
+        padding: 1rem 0;
+    }
+}
+
+/* Для очень маленьких телефонов (iPhone SE и т.д.) */
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2.1rem;
+    }
+    
+    .logo {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+}
