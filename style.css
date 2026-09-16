@@ -214,12 +214,13 @@ h1, h2, h3, .logo {
     flex: 1;
     position: relative;
     overflow: hidden;
+    width: 100%;
 }
 
 .treatment-image::after {
     content: '';
     display: block;
-    padding-bottom: 120%; /* creates aspect ratio */
+    padding-bottom: 100%;
 }
 
 .treatment-image img {
